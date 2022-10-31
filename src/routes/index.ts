@@ -80,10 +80,10 @@ routes.post('/pius', (req, res)=>{
         return res.status(413).json({message: "This text exceed the 140 character capcity"})
     }
 ///verificação para saber se o id do usuário informado é válido
+    routes.get('/users/:id', (req, res) =>{
     const user = users.find(user => user.id === id);
     if(!user) return res.status(404).json({message: "User not found"});
-    res.json(user);
-
+})
     pius.push(piu);
     return res.json(piu);
 })
@@ -95,10 +95,10 @@ routes.get('/pius', (req,res) => {
 routes.get('/pius/:id', (req, res)=>{
     const {id} = req.params;
 
-    const piu= pius.find(piu => piu.id === id);
+    const piu = pius.find(piu => piu.id === id);
     if(!piu) return res.status(404).json({message: "This piu does not exist"});
-})
-
+    return res.json(piu.text);
+});
 
 
 export default routes;
